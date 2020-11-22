@@ -42,8 +42,9 @@ class LinkedList {
 }
 
 const datum1 = {
-  videoURL: "https://www.youtube.com/embed/TQ8WlA2GXbk",
-  videoName: "Official髭男dism - Pretender［Official Video",
+  videoURL: "https://www.youtube.com/embed/FmZhFMzWIGQ",
+  videoName:
+    "【Female Sings】Pretender / Official Hige-dandism (Covered by KOBASOLO & Harutya)",
   requester: "Shin-Ji",
   lengthOfVideo: "5 minutes 35 seconds",
   description: "One of Shin-Ji's favourite songs",
