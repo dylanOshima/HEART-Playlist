@@ -1,20 +1,62 @@
+/* Color: #FF2672 */
+/* Font: Ubuntu */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
 html {
   margin: 0;
   padding: 0;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  background-image: url(background.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.main {
+  width: 70vw;
+  height: 90vh;
+  margin: 5vh 15vw;
+  background-color: rgba(0,0,0, 0.7);
+  border-radius: 30px;
+  overflow: auto;
 }
 
 .title {
   text-align: center;
+  padding-top: 20px;
 }
 
-.main {
-  width: 50vw;
-  margin: 1rem auto;
+.player { text-align: center; }
+.block { 
+  display: inline-block; 
+  width: 300px;
+  height: 300px;
 }
+iframe { width: 300px; height: 300px; }
+
+.side {
+  width: 100px;
+}
+
+button {
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+button:hover { opacity: 0.7; }
+button:focus { outline: 0; }
 
 .module {
-  border: 3px solid black;
-  border-radius: 10px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
   padding: 1rem 2rem;
-  margin: 1rem 0;
+  margin: 50px 10vw;
+  /* overflow: auto;
+  height: 200px; */
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
