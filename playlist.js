@@ -42,7 +42,7 @@ class LinkedList {
 }
 
 const datum1 = {
-  videoURL: "https://www.youtube.com/watch?v=TQ8WlA2GXbk",
+  videoURL: "https://www.youtube.com/embed/TQ8WlA2GXbk",
   videoName: "Official髭男dism - Pretender［Official Video",
   requester: "Shin-Ji",
   lengthOfVideo: "5 minutes 35 seconds",
@@ -50,7 +50,7 @@ const datum1 = {
 };
 
 const datum2 = {
-  videoURL: "https://www.youtube.com/watch?v=VFZNvj-HfBU",
+  videoURL: "https://www.youtube.com/embed/VFZNvj-HfBU",
   videoName:
     "Daði Freyr (Daði & Gagnamagnið) – Think About Things (Official Video)",
   requester: "Shin-Ji",
@@ -69,6 +69,11 @@ let node = linkedList.head;
 while (node) {
   let li = document.createElement("li");
   li.appendChild(document.createTextNode(node.data.videoName));
+  li.setAttribute("onclick", `changeVideo("${node.data.videoURL}")`);
   node = node.next;
   document.querySelector("#playlist").appendChild(li);
+}
+
+function changeVideo(videoURL) {
+  document.getElementById("videoPlayer").setAttribute("src", videoURL);
 }
