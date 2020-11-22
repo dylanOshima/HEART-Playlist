@@ -62,6 +62,7 @@ const datum2 = {
 let node1 = new Node(datum1);
 let node2 = new Node(datum2);
 node1.next = node2;
+node2.prev = node1;
 
 let linkedList = new LinkedList(node1);
 
@@ -75,6 +76,22 @@ while (node) {
   document.querySelector("#playlist").appendChild(li);
 }
 
+node = linkedList.head;
+
 function changeVideo(videoURL) {
   document.getElementById("videoPlayer").setAttribute("src", videoURL);
+}
+
+function playPrevious() {
+  if (node.prev) {
+    node = node.prev;
+    document.getElementById("videoPlayer").setAttribute("src", node.data.videoURL);
+  }
+}
+
+function playNext() {
+  if (node.next) {
+    node = node.next;
+    document.getElementById("videoPlayer").setAttribute("src", node.data.videoURL);
+  }
 }
