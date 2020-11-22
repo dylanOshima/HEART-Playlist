@@ -71,7 +71,8 @@ let node = linkedList.head;
 while (node) {
   let li = document.createElement("li");
   li.appendChild(document.createTextNode(node.data.videoName));
-  li.setAttribute("onclick", `changeVideo("${node.data.videoURL}")`);
+  li.setAttribute("id", `${node.data.videoName}`);
+  // li.setAttribute("onclick", `changeVideo("${node.data.videoURL}")`);
   node = node.next;
   document.querySelector("#playlist").appendChild(li);
 }
@@ -85,13 +86,31 @@ function changeVideo(videoURL) {
 function playPrevious() {
   if (node.prev) {
     node = node.prev;
-    document.getElementById("videoPlayer").setAttribute("src", node.data.videoURL);
+    document
+      .getElementById("videoPlayer")
+      .setAttribute("src", node.data.videoURL);
+    updateCurrentSong(node.data);
   }
 }
 
 function playNext() {
   if (node.next) {
     node = node.next;
-    document.getElementById("videoPlayer").setAttribute("src", node.data.videoURL);
+    document
+      .getElementById("videoPlayer")
+      .setAttribute("src", node.data.videoURL);
+    updateCurrentSong(node.data);
   }
+}
+
+function updateCurrentSong({
+  videoName,
+  requester,
+  lengthOfVideo,
+  description,
+}) {
+  document.getElementById("videoName").textContent = videoName;
+  document.getElementById("requester").textContent = requester;
+  document.getElementById("lengthOfVideo").textContent = lengthOfVideo;
+  document.getElementById("description").textContent = description;
 }
