@@ -79,10 +79,13 @@ while (node) {
 
 node = linkedList.head;
 
-function changeVideo(videoURL) {
-  document.getElementById("videoPlayer").setAttribute("src", videoURL);
-}
-
+/**
+ * Updates the webpage to reflect the current song in the linked list, if
+ * one exists. It will move the head pointer to the element before it. It
+ * then updates the webpage to reflect the information in the current node.
+ * 
+ * @returns {void}
+ */
 function playPrevious() {
   if (node.prev) {
     node = node.prev;
@@ -93,6 +96,13 @@ function playPrevious() {
   }
 }
 
+/**
+ * Fetches the next song in the linked list if one exists. It will move
+ * the head pointer to the next element. It then updates
+ * the webpage to reflect the information in the current node.
+ *
+ * @returns {void}
+ */
 function playNext() {
   if (node.next) {
     node = node.next;
@@ -103,6 +113,14 @@ function playNext() {
   }
 }
 
+/**
+ * Updates the webpage to reflect the current song in the linked list.
+ *
+ * @param {Node} node - a video node that has the properties: videoName, 
+ *  requester, lengthOfVideo, and description which are displayed in on
+ *  the webpage.
+ * @returns {void}
+ */
 function updateCurrentSong({
   videoName,
   requester,
@@ -114,3 +132,14 @@ function updateCurrentSong({
   document.getElementById("lengthOfVideo").textContent = lengthOfVideo;
   document.getElementById("description").textContent = description;
 }
+
+/** SETUP **/
+/** Called when the page renders. It updates the current song element so 
+ *  that it shows the information in the head node.
+ */
+(function main() {
+  document
+    .getElementById("videoPlayer")
+    .setAttribute("src", node.data.videoURL);
+  updateCurrentSong(node.data);
+})()
