@@ -8,8 +8,9 @@ class Node {
 }
 
 class LinkedList {
-  constructor(head = null) {
-    this.head = head;
+  constructor() {
+    this.head = null;
+    this.tail = null;
   }
 
   size() {
@@ -39,32 +40,97 @@ class LinkedList {
   getFirst() {
     return this.head;
   }
+
+  push(node) {
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      let temp = this.tail;
+      temp.next = node;
+      this.tail = node;
+    }
+  }
 }
 
-const datum1 = {
-  videoURL: "https://www.youtube.com/embed/FmZhFMzWIGQ",
-  videoName:
-    "【Female Sings】Pretender / Official Hige-dandism (Covered by KOBASOLO & Harutya)",
-  requester: "Shin-Ji",
-  lengthOfVideo: "5 minutes 35 seconds",
-  description: "One of Shin-Ji's favourite songs",
-};
+const data = [
+  {
+    videoURL: "https://www.youtube.com/embed/FmZhFMzWIGQ",
+    videoName:
+      "【Female Sings】Pretender / Official Hige-dandism (Covered by KOBASOLO & Harutya)",
+    requester: "Shin-Ji",
+    lengthOfVideo: "5 minutes 35 seconds",
+    description: "One of Shin-Ji's favourite songs",
+  },
+  {
+    videoURL: "https://www.youtube.com/embed/VFZNvj-HfBU",
+    videoName:
+      "Daði Freyr (Daði & Gagnamagnið) – Think About Things (Official Video)",
+    requester: "Shin-Ji",
+    lengthOfVideo: "4 minutes 5 seconds",
+    description: "Another one of Shin-Ji's favourite songs",
+  },
+  {
+    videoURL: "https://youtube.com/embed/eXvBjCO19QY",
+    requester: "Filip Ignijic",
+    videoName: "2Pac - Changes",
+    email: "2021.filip.ignijic@uwcisak.jp",
+  },
+  {
+    videoURL: "https://www.youtube.com/embed/NN6J-aYI0d4",
+    requester: "Lydia Etherington",
+    videoName: "Welcome to Wonderland",
+    email: "2021.lydia.etherington@uwcisak.jp",
+  },
+  {
+    videoURL: "https://www.youtube.com/embed/KoG7O1fwoAc",
+    requester: "Lingye",
+    videoName: "Photography - Cody Fry",
+    email: "2021.lingye.wu@uwcisak.jp",
+  },
+  {
+    videoURL: "https://youtube.com/embed/TETVNH3k8Ag",
+    requester: "Shin",
+    videoName: "Australia Street- Sticky Fingers",
+    email: "2021.shinnosuke.miyanaga@uwcisak.jp",
+  },
+  {
+    videoURL: "https://youtube.com/embed/bs56ygZplQA",
+    requester: "Nabill Nuqman",
+    videoName: "Race for the prize - Flaming Lips",
+    email: "2021.nabill.nuqman@uwcisak.jp",
+  },
+  {
+    videoURL: "https://youtube.com/embed/JeFwaWFTGYU",
+    requester: "Uzay Poyraz",
+    videoName: "The Dirty Mac - Yer Blues",
+    email: "2021.uzay.poyraz@uwcisak.jp",
+  },
+  {
+    videoURL: "https://www.youtube.com/embed/pOslx4hKwZk",
+    requester: "Kelven",
+    videoName: "Dave ft J hus - Samantha",
+    email: "2021.kelven.manuel@gmail.com",
+  },
+  {
+    videoURL: "https://www.youtube.com/embed/Dm-foWGDBF0",
+    requester: "Alexander Nygaard	",
+    videoName: "Duckworth - Kendrick Lamar",
+    email: "2021.alexander.nygaard@uwcisak.jp",
+  },
+  {
+    videoURL: "https://www.youtube.com/embed/A8u6Msm5Cj4",
+    requester: "Rikio Tsuyama-Dahlgren	",
+    videoName: "u n eye by Boy In Space",
+    email: "2021.rikio.dahlgren@uwcisak.jp",
+  },
+];
 
-const datum2 = {
-  videoURL: "https://www.youtube.com/embed/VFZNvj-HfBU",
-  videoName:
-    "Daði Freyr (Daði & Gagnamagnið) – Think About Things (Official Video)",
-  requester: "Shin-Ji",
-  lengthOfVideo: "4 minutes 5 seconds",
-  description: "Another one of Shin-Ji's favourite songs",
-};
+let linkedList = new LinkedList();
 
-let node1 = new Node(datum1);
-let node2 = new Node(datum2);
-node1.next = node2;
-node2.prev = node1;
-
-let linkedList = new LinkedList(node1);
+for (let datum of data) {
+  linkedList.push(new Node(datum));
+}
 
 // Inputting the video names into the UI
 let node = linkedList.head;
@@ -83,7 +149,7 @@ node = linkedList.head;
  * Updates the webpage to reflect the current song in the linked list, if
  * one exists. It will move the head pointer to the element before it. It
  * then updates the webpage to reflect the information in the current node.
- * 
+ *
  * @returns {void}
  */
 function playPrevious() {
@@ -116,7 +182,7 @@ function playNext() {
 /**
  * Updates the webpage to reflect the current song in the linked list.
  *
- * @param {Node} node - a video node that has the properties: videoName, 
+ * @param {Node} node - a video node that has the properties: videoName,
  *  requester, lengthOfVideo, and description which are displayed in on
  *  the webpage.
  * @returns {void}
@@ -134,7 +200,7 @@ function updateCurrentSong({
 }
 
 /** SETUP **/
-/** Called when the page renders. It updates the current song element so 
+/** Called when the page renders. It updates the current song element so
  *  that it shows the information in the head node.
  */
 (function main() {
@@ -142,4 +208,4 @@ function updateCurrentSong({
     .getElementById("videoPlayer")
     .setAttribute("src", node.data.videoURL);
   updateCurrentSong(node.data);
-})()
+})();
