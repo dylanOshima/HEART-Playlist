@@ -5,6 +5,26 @@ class Node {
     this.data = data;
     this.next = null;
   }
+
+  getNext() {
+    return this.next
+  }
+
+  getPrev() {
+    return this.prev
+  }
+
+  hasNext() {
+    return !(this.next === null)
+  }
+
+  hasPrev() {
+    return !(this.prev === null)
+  }
+
+  getData() {
+    return this.data;
+  }
 }
 
 class LinkedList {
@@ -39,22 +59,6 @@ class LinkedList {
 
   getFirst() {
     return this.head;
-  }
-
-  getNext(node) {
-    if (node.next !== null) {
-      return node.next
-    } else {
-      return node
-    }
-  }
-
-  getPrev(node) {
-    if (node.prev !== null) {
-      return node.prev
-    } else {
-      return node
-    }
   }
 
   push(node) {
@@ -153,8 +157,8 @@ for (let datum of data) {
 let node = linkedList.getFirst();
 while (node) {
   let li = document.createElement("li");
-  li.appendChild(document.createTextNode(node.data.videoName));
-  li.setAttribute("id", `${node.data.videoName}`);
+  li.appendChild(document.createTextNode(node.getData().videoName));
+  li.setAttribute("id", `${node.getData().videoName}`);
   // li.setAttribute("onclick", `changeVideo("${node.data.videoURL}")`);
   node = node.next;
   document.querySelector("#playlist").appendChild(li);
@@ -170,12 +174,12 @@ node = linkedList.getFirst();
  * @returns {void}
  */
 function playPrevious() {
-  if (node.prev) {
-    node = linkedList.getPrev(node);
+  if (node.hasPrev()) {
+    node = node.getPrev();
     document
       .getElementById("videoPlayer")
-      .setAttribute("src", node.data.videoURL);
-    updateCurrentSong(node.data);
+      .setAttribute("src", node.getData().videoURL);
+    updateCurrentSong(node.getData());
   }
 }
 
@@ -187,12 +191,12 @@ function playPrevious() {
  * @returns {void}
  */
 function playNext() {
-  if (node.next) {
-    node = linkedList.getNext(node);
+  if (node.hasNext()) {
+    node = node.getNext();
     document
       .getElementById("videoPlayer")
-      .setAttribute("src", node.data.videoURL);
-    updateCurrentSong(node.data);
+      .setAttribute("src", node.getData().videoURL);
+    updateCurrentSong(node.getData());
   }
 }
 
@@ -223,6 +227,6 @@ function updateCurrentSong({
 (function main() {
   document
     .getElementById("videoPlayer")
-    .setAttribute("src", node.data.videoURL);
-  updateCurrentSong(node.data);
+    .setAttribute("src", node.getData().videoURL);
+  updateCurrentSong(node.getData());
 })();
