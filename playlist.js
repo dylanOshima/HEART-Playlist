@@ -41,6 +41,22 @@ class LinkedList {
     return this.head;
   }
 
+  getNext(node) {
+    if (node.next !== null) {
+      return node.next
+    } else {
+      return node
+    }
+  }
+
+  getPrev(node) {
+    if (node.prev !== null) {
+      return node.prev
+    } else {
+      return node
+    }
+  }
+
   push(node) {
     if (this.head === null) {
       this.head = node;
@@ -48,6 +64,7 @@ class LinkedList {
     } else {
       let temp = this.tail;
       temp.next = node;
+      node.prev = temp;
       this.tail = node;
     }
   }
@@ -133,7 +150,7 @@ for (let datum of data) {
 }
 
 // Inputting the video names into the UI
-let node = linkedList.head;
+let node = linkedList.getFirst();
 while (node) {
   let li = document.createElement("li");
   li.appendChild(document.createTextNode(node.data.videoName));
@@ -143,7 +160,7 @@ while (node) {
   document.querySelector("#playlist").appendChild(li);
 }
 
-node = linkedList.head;
+node = linkedList.getFirst();
 
 /**
  * Updates the webpage to reflect the current song in the linked list, if
@@ -154,7 +171,7 @@ node = linkedList.head;
  */
 function playPrevious() {
   if (node.prev) {
-    node = node.prev;
+    node = linkedList.getPrev(node);
     document
       .getElementById("videoPlayer")
       .setAttribute("src", node.data.videoURL);
@@ -171,7 +188,7 @@ function playPrevious() {
  */
 function playNext() {
   if (node.next) {
-    node = node.next;
+    node = linkedList.getNext(node);
     document
       .getElementById("videoPlayer")
       .setAttribute("src", node.data.videoURL);
